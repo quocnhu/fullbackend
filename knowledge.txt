@@ -1,8 +1,9 @@
 HOW TO INITIALIZE FIRST PROJECT: 
     npm init 
 HOW TO INSTALL SPECIFIC VERSION: 
-    npm i --save-exact express@version
-
+    npm i --save-exact express@version //local installing 
+                                       //global installing
+        
 HOW TO IGNORE FOLDER: 
     .gitignore > file > type any folder you want to ignore (green or not green)
 HOW TO FIX STARTING ON SERVER: 
@@ -13,3 +14,10 @@ app.METHOD(PATH, HANDLER)
 
     how to send dynamic content (ex: html)
 ----------------------------
+STRUCTURE OF EXPRESS SERVER 
+ EXPRESS
+    TEMPLATE ENGINE
+    ROUTE
+
+-------------------------------
+ENV (ENVIROMENT VARIABLE)
