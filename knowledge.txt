@@ -1,0 +1,9 @@
+HOW TO INITIALIZE FIRST PROJECT: 
+    npm init 
+HOW TO INSTALL SPECIFIC VERSION: 
+    npm i --save-exact express@version
+
+HOW TO IGNORE FOLDER: 
+    .gitignore > file > type any folder you want to ignore (green or not green)
+HOW TO FIX STARTING ON SERVER: 
+    //"dev/start": "node server.js"=> you can fix to start node server,
