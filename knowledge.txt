@@ -24,3 +24,5 @@ STRUCTURE OF EXPRESS SERVER
 -------------------------------
 ENV (ENVIROMENT VARIABLE)
     npm install dotenv 
+-----------------------------
+--save-dev/exact package

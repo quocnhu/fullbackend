@@ -13,7 +13,7 @@ app.set('view engine', 'ejs')
 
 //DECLEARING ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World! and nodemon just added')
 })
 app.get('/nhubackend', (req, res) => {
     //res.send('Hello new path')
