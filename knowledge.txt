@@ -24,5 +24,10 @@ STRUCTURE OF EXPRESS SERVER
 -------------------------------
 ENV (ENVIROMENT VARIABLE)
     npm install dotenv 
+<<<<<<< HEAD
    *recommend to push .env.exmaple to git to avoid leaking data
 ---------NODEMON----------------
+=======
+-----------------------------
+--save-dev/exact package
+>>>>>>> 6958677f41dc2462f56cf4cad1f7466b6399989a
