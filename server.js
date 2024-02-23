@@ -6,17 +6,18 @@ const app = express();
 const port = process.env.PORT || 7676
 const configViewEngine = require('./src/config/viewEngine')
 const webroutes = require('./src/routes/web')
+
+
 //-----CONFIGURE TEMPLATE ENGINE + STATIC FILES JUST IN ONE FUNCTION
 configViewEngine(app);
+
+
 //-----ROUTES---------
-app.use('/',webroutes)
+app.use('/',webroutes) //root route
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-
-
 
 
 //------CONFIGURE TEMPLATE ENGINE
