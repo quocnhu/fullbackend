@@ -3,7 +3,7 @@ const path = require('path'); //in case you template location does not work (is 
 const app = express();
 //SET UP ENV
 require('dotenv').config();
-const port = process.env.PORT
+const port = process.env.PORT || 7676
 
 
 //CONFIGURE TEMPLATE ENGINE
@@ -13,7 +13,7 @@ app.set('view engine', 'ejs')
 
 //DECLEARING ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World! You just made first initializing')
 })
 app.get('/nhubackend', (req, res) => {
     //res.send('Hello new path')
