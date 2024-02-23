@@ -24,10 +24,9 @@ STRUCTURE OF EXPRESS SERVER
 -------------------------------
 ENV (ENVIROMENT VARIABLE)
     npm install dotenv 
-<<<<<<< HEAD
    *recommend to push .env.exmaple to git to avoid leaking data
 ---------NODEMON----------------
-=======
------------------------------
---save-dev/exact package
->>>>>>> 6958677f41dc2462f56cf4cad1f7466b6399989a
+ .js, .mjs,.coffe, .litcoffe
+ -----------STATIC FILE---------------------
+ as dev you just need to allow user to access specific location that is how st works
+  app.use(express.static('location of your file on backend'));
