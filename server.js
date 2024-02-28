@@ -6,11 +6,22 @@ const app = express();
 const port = process.env.PORT || 7676
 const configViewEngine = require('./src/config/viewEngine')
 const webroutes = require('./src/routes/web')
-
+const connection = require('./src/config/database')
 
 //-----CONFIGURE TEMPLATE ENGINE + STATIC FILES JUST IN ONE FUNCTION
 configViewEngine(app);
+//---CONNECTION DATABASE
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+    return;
+  }
+  console.log('Connected to MySQL server again');
 
+})
+connection.query('SELECT * FROM users',(err,results,fields)=>{
+  console.log('>>>Results:', results)
+})
 
 //-----ROUTES---------
 app.use('/',webroutes) //root route
