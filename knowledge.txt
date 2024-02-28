@@ -32,4 +32,7 @@ ENV (ENVIROMENT VARIABLE)
   app.use(express.static('location of your file on backend'));
         whever project you deploy it also has this
 ---------MVC-------------------------------
- +
+---------MYSQL----------------------
+require('mysql2/promise')
+    +when we use async/await we need to add 'promise' behind
+    +callback

@@ -6,22 +6,20 @@ const app = express();
 const port = process.env.PORT || 7676
 const configViewEngine = require('./src/config/viewEngine')
 const webroutes = require('./src/routes/web')
-const connection = require('./src/config/database')
+const pool = require('./src/config/database')
 
 //-----CONFIGURE TEMPLATE ENGINE + STATIC FILES JUST IN ONE FUNCTION
 configViewEngine(app);
 //---CONNECTION DATABASE
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-    return;
-  }
-  console.log('Connected to MySQL server again');
+// pool.getConnection((err, connection) => {
+//   if (err) {
+//     console.error('Error connecting to MySQL:', err);
+//   }
+//   else {
+//     console.log('MySQL connected!');
+//   }
 
-})
-connection.query('SELECT * FROM users',(err,results,fields)=>{
-  console.log('>>>Results:', results)
-})
+// });
 
 //-----ROUTES---------
 app.use('/',webroutes) //root route
@@ -42,6 +40,19 @@ app.listen(port, () => {
 //   res.send('Hello World! You just made first initializing')
 // })
 // app.get('/nhubackend', (req, res) => {
-//   //res.send('Hello new path')
-//   res.render('sample.ejs') // dynamic rendering 
-// })
+  //   //res.send('Hello new path')
+  //   res.render('sample.ejs') // dynamic rendering 
+  // })
+
+  //-----DATABASE----------
+  // connection.connect((err) => {
+  //   if (err) {
+  //     console.error('Error connecting to MySQL:', err);
+  //     return;
+  //   }
+  //   console.log('Connected to MySQL server again');
+  
+  // })
+  // connection.query('SELECT * FROM users',(err,results,fields)=>{
+  //   console.log('>>>Results:', results)
+  // })
