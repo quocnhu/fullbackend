@@ -1,5 +1,5 @@
 const express = require('express')
-const {getHomepage,renderEjs,homePage,postCreateUser} = require('../controllers/homeController')
+const {getHomepage,renderEjs,homePage,postCreateUser,getCreatePage} = require('../controllers/homeController')
 const router = express.Router()
 
 //HOMEPAGE
@@ -9,7 +9,10 @@ router.get('/nhubackend',renderEjs)
 
 router.get('/home',homePage)
 
-//handle crud------
+//HANDLING PAGE
+router.get('/create', getCreatePage)
+
+//HANDLING CRUD------
 router.post('/create-user', postCreateUser)
 
 module.exports = router;

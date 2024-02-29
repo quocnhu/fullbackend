@@ -36,13 +36,33 @@ const homePage = (req, res) => {
 }
 // HANDLE CRUD -------------------
 
+// const postCreateUser = (req, res) => {
+//     console.log('Check what client sent', req.body) //rember req = request, res= response
+//     res.send('created user')
+// }
 const postCreateUser = (req, res) => {
-    console.log('Check what client sent', req.body) //rember req = request, res= response
-    res.send('created user')
+    let {name,email,city} = req.body;
+    console.log('check>>', name,email,city)
+    //BECAUSE YOU IMPORTED DB ALREADY
+    //method --> connection.query('mysql syntax', passing values, responding function)
+    pool.query( //you are using 'pool' not connection.
+        `INSERT INTO users (name,email,city) VALUES (?,?,?)`,
+        [name,email,city],
+        function (err, results) {
+            res.send('Imported data to db')
+        }
+
+    )
+
+}
+//HANDLE PAGES
+const getCreatePage =(req,res) => {
+    res.render('create.ejs')
 }
 module.exports = {
     getHomepage,
     renderEjs,
     homePage,
     postCreateUser,
+    getCreatePage
 }
