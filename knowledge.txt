@@ -36,3 +36,6 @@ ENV (ENVIROMENT VARIABLE)
 require('mysql2/promise')
     +when we use async/await we need to add 'promise' behind
     +callback
+------GETTING DATA FROM CLIENT BY ADDING LIBRARY OF EXPRESS ----
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}))

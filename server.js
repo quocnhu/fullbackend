@@ -8,18 +8,24 @@ const configViewEngine = require('./src/config/viewEngine')
 const webroutes = require('./src/routes/web')
 const pool = require('./src/config/database')
 
+//------before and after really important! ---GETING DATA FROM CLIENT TO SERVER----
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //-----CONFIGURE TEMPLATE ENGINE + STATIC FILES JUST IN ONE FUNCTION
 configViewEngine(app);
-//---CONNECTION DATABASE
-// pool.getConnection((err, connection) => {
-//   if (err) {
-//     console.error('Error connecting to MySQL:', err);
-//   }
-//   else {
-//     console.log('MySQL connected!');
-//   }
 
-// });
+
+//---CONNECTION DATABASE
+pool.getConnection((err, connection) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+  }
+  else {
+    console.log('MySQL connected!');
+  }
+
+});
 
 //-----ROUTES---------
 app.use('/',webroutes) //root route
