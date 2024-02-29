@@ -1,5 +1,6 @@
 //router.Method('/route', handler)
 const pool = require('../config/database')
+const {getAllUsers} = require('../services/CRUDServices')
 // const getHomepage = (req, res) => {
 //     precess data
 //     call model
@@ -31,8 +32,9 @@ const renderEjs = (req,res) => {
     res.render('sample.ejs')
 }
 
-const homePage = (req, res) => {
-    res.render('home.ejs')
+const homePage = async (req, res) => {
+    let results = await getAllUsers() //if we do not use 'await' it will return {}
+    res.render('home.ejs',{listUsers: results})
 }
 // HANDLE CRUD -------------------
 
@@ -40,21 +42,35 @@ const homePage = (req, res) => {
 //     console.log('Check what client sent', req.body) //rember req = request, res= response
 //     res.send('created user')
 // }
-const postCreateUser = (req, res) => {
-    let {name,email,city} = req.body;
-    console.log('check>>', name,email,city)
-    //BECAUSE YOU IMPORTED DB ALREADY
-    //method --> connection.query('mysql syntax', passing values, responding function)
-    pool.query( //you are using 'pool' not connection.
+// -----------CALLBACK----------------
+// const postCreateUser = (req, res) => {
+//     let {name,email,city} = req.body;
+//     console.log('check>>', name,email,city)
+//     //BECAUSE YOU IMPORTED DB ALREADY
+//     //method --> connection.query('mysql syntax', passing values, responding function)
+//     pool.query( //you are using 'pool' not connection.
+//         `INSERT INTO users (name,email,city) VALUES (?,?,?)`,
+//         [name,email,city],
+//         function (err, results) {
+//             res.send('Imported data to db')
+//         }
+
+//     )
+
+// }
+//--------------PROMISE------------------
+const postCreateUser = async(req, res) => {
+    let {name,email,city} = req.body; //returning to object why we use object dis
+    // console.log('check>>', req.body)
+
+    let {results, fields} = await pool.query( //you are using 'pool' not connection.
         `INSERT INTO users (name,email,city) VALUES (?,?,?)`,
-        [name,email,city],
-        function (err, results) {
-            res.send('Imported data to db')
-        }
-
+        [name,email,city]
     )
-
+    res.send('CREATED USER SUCCESSFUL')
+    // SELECT  ---> [], ELSE ---> {} in this case we can use both
 }
+
 //HANDLE PAGES
 const getCreatePage =(req,res) => {
     res.render('create.ejs')

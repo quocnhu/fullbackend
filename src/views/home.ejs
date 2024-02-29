@@ -34,6 +34,7 @@
         </fieldset>
       </form>
     </div> -->
+    <!-- <%= JSON.stringify(listUsers) %> -->
     <div class="container">
       <h1 class="title">User List</h1>
       <table id="customers">
@@ -42,19 +43,20 @@
           <th>Name</th>
           <th>Email</th>
           <th>City</th>
+          <th>Action</th>
         </tr>
+        <% for (let i = 0; i < listUsers.length; i++) { %>
         <tr>
-          <td>1</td>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
+          <td><%= listUsers[i].id%></td>
+          <td><%= listUsers[i].name %></td>
+          <td><%= listUsers[i].email %></td>
+          <td><%= listUsers[i].city %></td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Berglunds snabbköp</td>
-          <td>Christina Berglund</td>
-          <td>Sweden</td>
-        </tr>
+        <% } %>
       </table>
     </div>
   </body>

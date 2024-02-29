@@ -23,6 +23,7 @@ pool.getConnection((err, connection) => {
   }
   else {
     console.log('MySQL connected!');
+    
   }
 
 });
