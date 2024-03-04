@@ -1,5 +1,5 @@
 const express = require('express')
-const {getHomepage,renderEjs,homePage,postCreateUser,getCreatePage} = require('../controllers/homeController')
+const {getHomepage,renderEjs,homePage,postCreateUser,getCreatePage,getUpdatePage} = require('../controllers/homeController')
 const router = express.Router()
 
 //HOMEPAGE
@@ -9,8 +9,9 @@ router.get('/nhubackend',renderEjs)
 
 router.get('/home',homePage)
 
-//HANDLING PAGE
+//HANDLING PAGE BY NAVIGATING
 router.get('/create', getCreatePage)
+router.get('/update/:id', getUpdatePage) // add :id because i want to have any error
 
 //HANDLING CRUD------
 router.post('/create-user', postCreateUser)

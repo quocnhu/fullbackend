@@ -67,18 +67,25 @@ const postCreateUser = async(req, res) => {
         `INSERT INTO users (name,email,city) VALUES (?,?,?)`,
         [name,email,city]
     )
-    res.send('CREATED USER SUCCESSFUL')
+    // res.send('CREATED USER SUCCESSFUL')
+    res.redirect('/home')
     // SELECT  ---> [], ELSE ---> {} in this case we can use both
 }
-
-//HANDLE PAGES
+//HANDLE PAGES BY NAVIGATING
 const getCreatePage =(req,res) => {
     res.render('create.ejs')
+}
+
+const getUpdatePage =(req,res) => {
+    let userId = req.params.id
+    console.log("showing params:>>", req.params, userId)
+    res.render('edit.ejs')
 }
 module.exports = {
     getHomepage,
     renderEjs,
     homePage,
     postCreateUser,
-    getCreatePage
+    getCreatePage,
+    getUpdatePage
 }

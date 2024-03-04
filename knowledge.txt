@@ -40,3 +40,5 @@ require('mysql2/promise')
 ------GETTING DATA FROM CLIENT BY ADDING LIBRARY OF EXPRESS ----
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}))
+-------ROUTE PARAMATER-------------------------
+allowing you to get id of a specific user > document in route > express
