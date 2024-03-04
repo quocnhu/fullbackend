@@ -1,5 +1,5 @@
 const express = require('express')
-const {getHomepage,renderEjs,homePage,postCreateUser,getCreatePage,getUpdatePage} = require('../controllers/homeController')
+const {getHomepage,renderEjs,homePage,postCreateUser,getCreatePage,getUpdatePage,postUpdateUser} = require('../controllers/homeController')
 const router = express.Router()
 
 //HOMEPAGE
@@ -15,6 +15,7 @@ router.get('/update/:id', getUpdatePage) // add :id because i want to have any e
 
 //HANDLING CRUD------
 router.post('/create-user', postCreateUser)
+router.post('/update-user', postUpdateUser)
 
 module.exports = router;
 // because in this case we do not need to use 'express' so just replace router 

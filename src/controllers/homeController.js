@@ -1,6 +1,6 @@
 //router.Method('/route', handler)
 const pool = require('../config/database')
-const {getAllUsers} = require('../services/CRUDServices')
+const {getAllUsers,getUserId,updateUserId} = require('../services/CRUDServices')
 // const getHomepage = (req, res) => {
 //     precess data
 //     call model
@@ -59,6 +59,7 @@ const homePage = async (req, res) => {
 
 // }
 //--------------PROMISE------------------
+// these pass to route
 const postCreateUser = async(req, res) => {
     let {name,email,city} = req.body; //returning to object why we use object dis
     // console.log('check>>', req.body)
@@ -76,10 +77,32 @@ const getCreatePage =(req,res) => {
     res.render('create.ejs')
 }
 
-const getUpdatePage =(req,res) => {
+const getUpdatePage = async (req,res) => {
     let userId = req.params.id
-    console.log("showing params:>>", req.params, userId)
-    res.render('edit.ejs')
+    // console.log("showing params:>>", req.params, userId)
+    // res.render('edit.ejs')
+    // let [results, fields] = await pool.query(` SELECT * FROM users where id = ?`,[userId]) 
+    // console.log(results)
+    // let user = results && results.length > 0 ? results[0] : {}; //to check that may be user enter a route not existed or that item is deleted
+    // console.log(user)
+    let user = await getUserId(userId)
+    res.render('edit.ejs', {userEdit : user});
+}
+
+const postUpdateUser = async (req,res) => {
+    
+    let {id,name,email,city} = req.body
+    await updateUserId(name,email,city,id)
+    // // console.log("check content:>>>>",req.body)
+    // let [results, fields] = await pool.query (`
+    // UPDATE users SET name = ?, email = ?, city = ?
+    // WHERE id = ?`,[name,email,city,id]); //OMG --> i made a mistake when i put id at the first position
+    
+    res.redirect('/home')
+    
+
+  
+
 }
 module.exports = {
     getHomepage,
@@ -87,5 +110,6 @@ module.exports = {
     homePage,
     postCreateUser,
     getCreatePage,
-    getUpdatePage
+    getUpdatePage,
+    postUpdateUser
 }
