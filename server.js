@@ -1,13 +1,15 @@
 //SET UP ENV
-require('dotenv').config();
-const express = require('express');
-const path = require('path'); //in case you template location does not work (is available)
+require("dotenv").config();
+const express = require("express");
+const path = require("path"); //in case you template location does not work (is available)
 const app = express();
-const port = process.env.PORT || 7676
-const configViewEngine = require('./src/config/viewEngine')
-const webroutes = require('./src/routes/web')
-const pool = require('./src/config/database')
-
+const port = process.env.PORT || 7676;
+const configViewEngine = require("./src/config/viewEngine");
+const webroutes = require("./src/routes/web");
+import initApiRouters from "./src/routes/api";
+const pool = require("./src/config/database");
+const { default: initApiRouters } = require("./src/routes/api");
+import configCors from "./src/config/cors";
 //------before and after really important! ---GETING DATA FROM CLIENT TO SERVER----
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,26 +17,23 @@ app.use(express.urlencoded({ extended: true }));
 //-----CONFIGURE TEMPLATE ENGINE + STATIC FILES JUST IN ONE FUNCTION
 configViewEngine(app);
 
-
 //---CONNECTION DATABASE
 pool.getConnection((err, connection) => {
   if (err) {
-    console.error('Error connecting to MySQL:', err);
+    console.error("Error connecting to MySQL:", err);
+  } else {
+    console.log("MySQL connected!");
   }
-  else {
-    console.log('MySQL connected!');
-    
-  }
-
 });
-
+//---CONFIG CORS------
+configCors(app);
 //-----ROUTES---------
-app.use('/',webroutes) //root route
+app.use("/", webroutes); //root route
+initApiRouters(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
+  console.log(`Example app listening on port ${port}`);
+});
 
 //------CONFIGURE TEMPLATE ENGINE
 // app.set('views', './src/views')//this place used to teach where is rendering engine template located
@@ -47,19 +46,19 @@ app.listen(port, () => {
 //   res.send('Hello World! You just made first initializing')
 // })
 // app.get('/nhubackend', (req, res) => {
-  //   //res.send('Hello new path')
-  //   res.render('sample.ejs') // dynamic rendering 
-  // })
+//   //res.send('Hello new path')
+//   res.render('sample.ejs') // dynamic rendering
+// })
 
-  //-----DATABASE----------
-  // connection.connect((err) => {
-  //   if (err) {
-  //     console.error('Error connecting to MySQL:', err);
-  //     return;
-  //   }
-  //   console.log('Connected to MySQL server again');
-  
-  // })
-  // connection.query('SELECT * FROM users',(err,results,fields)=>{
-  //   console.log('>>>Results:', results)
-  // })
+//-----DATABASE----------
+// connection.connect((err) => {
+//   if (err) {
+//     console.error('Error connecting to MySQL:', err);
+//     return;
+//   }
+//   console.log('Connected to MySQL server again');
+
+// })
+// connection.query('SELECT * FROM users',(err,results,fields)=>{
+//   console.log('>>>Results:', results)
+// })
